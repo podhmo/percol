@@ -28,7 +28,7 @@ from percol import Percol
 from percol import tty
 from percol import debug
 from percol import ansi
-from percol.compat import text_type
+from percol.compat import text_type, text_
 
 INSTRUCTION_TEXT = ansi.markup("""<bold><blue>{logo}</blue></bold>
                                 <on_blue><underline> {version} </underline></on_blue>
@@ -53,14 +53,14 @@ def load_rc(percol, path = None, encoding = 'utf-8'):
         path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'rc.py')
     try:
         with open(path, 'r') as rc:
-            exec(rc.read().decode(encoding), locals())
+            exec(text_(rc, encoding), locals())
     except Exception as e:
         debug.log("Exception in rc file {0}".format(path), e)
 
 def eval_string(percol, string_to_eval, encoding = 'utf-8'):
     try:
         if isinstance(string_to_eval, text_type):
-            string_to_eval = string_to_eval.decode(encoding)
+            string_to_eval = text_(string_to_eval, encoding)
         exec(string_to_eval, locals())
     except Exception as e:
         debug.log("Exception in eval_string", e)

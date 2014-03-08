@@ -18,7 +18,7 @@
 #
 
 from percol import display, debug
-from percol.compat import string_types
+from percol.compat import string_types, text_
 
 class SelectorModel(object):
     def __init__(self,
@@ -167,13 +167,13 @@ class SelectorModel(object):
     # ------------------------------------------------------------ #
 
     def append_char_to_query(self, ch):
-        self.query += chr(ch).decode(self.percol.encoding)
+        self.query += text_(chr(ch), encoding=self.percol.encoding)
         self.forward_char()
 
     def insert_char(self, ch):
         q = self.query
         c = self.caret
-        self.query = q[:c] + chr(ch).decode(self.percol.encoding) + q[c:]
+        self.query = q[:c] + text_(chr(ch), encoding=self.percol.encoding) + q[c:]
         self.set_caret(c + 1)
 
     def insert_string(self, string):
