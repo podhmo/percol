@@ -47,7 +47,7 @@ class SelectorModel(object):
     # Initializer
     # ============================================================ #
 
-    def setup_results(self, query):
+    def setup_results(self, query):        
         self.query   = self.old_query = query or u""
         self.results = self.finder.get_results(self.query)
         self.marks   = {}
