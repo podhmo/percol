@@ -23,7 +23,7 @@ import curses
 import re
 
 from percol import markup, debug
-from percol.compat import iteritems_
+from percol.compat import iteritems_, text_type
 
 FG_COLORS = {
     "black"   : curses.COLOR_BLACK,
@@ -87,7 +87,7 @@ def screen_len(s, beg = None, end = None):
         end = len(s[beg:end].expandtabs())
         s = s.expandtabs()
 
-    if s.__class__ != types.UnicodeType:
+    if isinstance(s, text_type):
         return end - beg
 
     dis_len = end - beg
@@ -296,7 +296,7 @@ class Display(object):
         self.screen.refresh()
 
     def get_raw_string(self, s):
-        return s.encode(self.encoding) if s.__class__ == types.UnicodeType else s
+        return s.encode(self.encoding) if isinstance(s, text_type) else s
 
     def addnstr(self, y, x, s, n, style):
         if style.__class__ != types.IntType:

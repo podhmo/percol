@@ -28,6 +28,7 @@ from percol import Percol
 from percol import tty
 from percol import debug
 from percol import ansi
+from percol.compat import text_type
 
 INSTRUCTION_TEXT = ansi.markup("""<bold><blue>{logo}</blue></bold>
                                 <on_blue><underline> {version} </underline></on_blue>
@@ -58,8 +59,7 @@ def load_rc(percol, path = None, encoding = 'utf-8'):
 
 def eval_string(percol, string_to_eval, encoding = 'utf-8'):
     try:
-        import types
-        if string_to_eval.__class__ != types.UnicodeType:
+        if isinstance(string_to_eval, text_type):
             string_to_eval = string_to_eval.decode(encoding)
         exec(string_to_eval, locals())
     except Exception as e:

@@ -1,7 +1,10 @@
 # -*- coding:utf-8 -*-
 
 import unittest
-from percol.compat import text_
+from percol.compat import (
+    text_, 
+    bytes_
+)
 
 class DummyModel(object):
     query = text_("@model.query@")
@@ -124,6 +127,15 @@ class SelectorViewTests(unittest.TestCase):
 
     def test__format_prompt_string__k(self):
         data = text_("xx%kyyy")
+        target = self._makeTarget()
+        target.model.results_count = 100
+        result = self._callFunction(target, data)
+
+        assert DummyPercol.last_key == text_("@last_key@")
+        self.assertEqual(result, text_("xx@last_key@yyy"))
+
+    def test__format_prompt_string__response_is_not_unicode(self):
+        data = bytes_("xx%kyyy")
         target = self._makeTarget()
         target.model.results_count = 100
         result = self._callFunction(target, data)
