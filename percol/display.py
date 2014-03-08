@@ -22,7 +22,7 @@ import curses
 import re
 
 from percol import markup, debug
-from percol.compat import iteritems_, text_type, xrange_, integer_types
+from percol.compat import iteritems_, text_type, xrange_, integer_types, text_
 
 FG_COLORS = {
     "black"   : curses.COLOR_BLACK,
@@ -224,7 +224,7 @@ class Display(object):
     def add_aligned_string_tokens(self, tokens,
                                   y_align = "top", x_align = "left",
                                   y_offset = 0, x_offset = 0,
-                                  fill = False, fill_char = " ", fill_style = None):
+                                  fill = False, fill_char = text_(" "), fill_style = None):
         dis_lens  = [screen_len(s) for (s, attrs) in tokens]
         whole_len = sum(dis_lens)
 
@@ -247,7 +247,7 @@ class Display(object):
                            y_align = "top", x_align = "left",
                            y_offset = 0, x_offset = 0,
                            style = None,
-                           fill = False, fill_char = " ", fill_style = None):
+                           fill = False, fill_char = text_(" "), fill_style = None):
         dis_len = screen_len(s)
 
         pos_x = self.get_pos_x(x_align, x_offset, dis_len)

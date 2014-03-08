@@ -40,4 +40,4 @@ class DisplayTests(unittest.TestCase):
         data = text_("this is test message")
         target = self._makeTarget()
         result = target.add_aligned_string(data, fill=True)
-
+        self.assertEqual(result, (0, 0))
