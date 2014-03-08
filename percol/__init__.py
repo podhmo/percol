@@ -41,7 +41,7 @@ from percol import debug, action
 
 from percol.display import Display
 from percol.finder  import FinderMultiQueryString
-from percol.key     import KeyHandler
+from percol.key     import KeyHandler, SPECIAL_KEYS
 from percol.model   import SelectorModel
 from percol.view    import SelectorView
 from percol.command import SelectorCommand
@@ -105,7 +105,7 @@ class Percol(object):
         self.display = Display(self.screen, self.encoding)
 
         # create keyhandler
-        self.keyhandler = key.KeyHandler(self.screen)
+        self.keyhandler = KeyHandler(self.screen)
 
         # create view
         self.view = SelectorView(percol = self)
@@ -261,7 +261,7 @@ class Percol(object):
         self.display.update_screen_size()
         # XXX: trash -1 (it seems that resize key sends -1)
         self.keyhandler.get_key_for(self.screen.getch())
-        return key.SPECIAL_KEYS[ch]
+        return SPECIAL_KEYS[ch]
 
     def handle_utf8(self, ch):
         ukey = self.keyhandler.get_utf8_key_for(ch)
