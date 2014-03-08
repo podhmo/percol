@@ -20,7 +20,7 @@ class LazynessIterationTests(unittest.TestCase):
         data = {1: dummy, 2:dummy}
 
         with self.assertRaises(DontReach):
-            next(map_(lambda (k, it): next(it), iteritems_(data)))
+            next(map_(lambda p: next(p[1]), iteritems_(data)))
 
     def test_iteritems__imap(self):
         from percol.compat import (
@@ -31,6 +31,6 @@ class LazynessIterationTests(unittest.TestCase):
         dummy = iter(DummyIterator())
         data = {1: dummy, 2:dummy}
 
-        result = next(imap_(lambda (k, it): next(it), iteritems_(data)))
+        result = next(imap_(lambda p: next(p[1]), iteritems_(data)))
         self.assertEqual(result, 1)
 
