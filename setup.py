@@ -4,7 +4,8 @@ from setuptools import setup
 
 import percol
 tests_require = [
-    'nose'
+    'nose', 
+    'mock'
 ]
 
 setup(name             = "percol",

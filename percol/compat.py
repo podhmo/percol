@@ -155,3 +155,8 @@ if PY3: # pragma: no cover
 else:
     def is_nonstr_iter(v):
         return hasattr(v, '__iter__')
+
+try:
+    from StringIO import StringIO as NativeIO
+except ImportError: # pragma: no cover
+    from io import StringIO as NativeIO
