@@ -20,6 +20,7 @@
 # ============================================================ #
 # Lazy Array
 # ============================================================ #
+from percol.compat import xrange_
 
 class LazyArray(object):
     """
@@ -72,7 +73,7 @@ class LazyArray(object):
 
 if __name__ == "__main__":
     def getnumbers(n):
-        for x in xrange(1, n):
+        for x in xrange_(1, n):
             print("yield " + str(x))
             yield x
     larray = LazyArray(getnumbers(20))

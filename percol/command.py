@@ -16,6 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
+from percol.compat import xrange_
 
 class SelectorCommand(object):
     """
@@ -95,7 +96,7 @@ class SelectorCommand(object):
         self.select_successor()
 
     def __get_all_mark_indices(self):
-        return xrange(self.model.results_count)
+        return xrange_(self.model.results_count)
 
     def mark_all(self):
         for mark_index in self.__get_all_mark_indices():

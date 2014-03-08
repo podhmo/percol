@@ -23,7 +23,7 @@ import curses
 import re
 
 from percol import markup, debug
-from percol.compat import iteritems_, text_type
+from percol.compat import iteritems_, text_type, xrange_
 
 FG_COLORS = {
     "black"   : curses.COLOR_BLACK,
@@ -91,7 +91,7 @@ def screen_len(s, beg = None, end = None):
         return end - beg
 
     dis_len = end - beg
-    for i in xrange(beg, end):
+    for i in xrange_(beg, end):
         if unicodedata.east_asian_width(s[i]) in ("W", "F"):
             dis_len += 1
 

@@ -34,3 +34,6 @@ class LazynessIterationTests(unittest.TestCase):
         result = next(imap_(lambda p: next(p[1]), iteritems_(data)))
         self.assertEqual(result, 1)
 
+    def test_xrange(self):
+        from percol.compat import xrange_
+        self.assertNotEqual(type(xrange_(1000000000000000000)), list)

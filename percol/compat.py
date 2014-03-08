@@ -141,6 +141,11 @@ else:
     import itertools
     imap_ = itertools.imap
 
+if PY3: # pragma: no cover
+    xrange_ = range
+else:
+    xrange_ = xrange
+
 
 if PY3: # pragma: no cover
     def is_nonstr_iter(v):
