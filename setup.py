@@ -1,8 +1,11 @@
 #/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup
 
 import percol
+tests_require = [
+    'nose'
+]
 
 setup(name             = "percol",
       version          = percol.__version__,
@@ -24,4 +27,8 @@ setup(name             = "percol",
                           "Programming Language :: Python :: 3"],
       keywords         = "anything.el unite.vim dmenu shell pipe filter curses",
       license          = "MIT",
-      )
+      extras_require = {
+          "testing": tests_require
+      }, 
+      test_suite="percol.tests"
+  )
