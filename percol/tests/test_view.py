@@ -134,6 +134,7 @@ class SelectorViewTests(unittest.TestCase):
         assert DummyPercol.last_key == text_("@last_key@")
         self.assertEqual(result, text_("xx@last_key@yyy"))
 
+    @unittest.skip("not expexted that passing byte string")
     def test__format_prompt_string__response_is_not_unicode(self):
         data = bytes_("xx%kyyy")
         target = self._makeTarget()

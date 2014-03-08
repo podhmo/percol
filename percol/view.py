@@ -25,7 +25,7 @@ import math
 from itertools import islice
 
 from percol import display, debug
-from percol.compat import text_type, text_, binary_type
+from percol.compat import text_type, integer_types, string_types, text_
 
 class SelectorView(object):
     def __init__(self, percol = None):
@@ -218,11 +218,13 @@ class SelectorView(object):
             al = matchobj.group(1)
             if al in self.prompt_replacees:
                 res = self.prompt_replacees[al](self, matchobj = matchobj, offset = offset)
-                if isinstance(res, text_type):
-                    return res
+                if isinstance(res, string_types):
+                    return text_(res, encoding=self.percol.encoding, errors='replace')
+                elif isinstance(res, integer_types):
+                    return text_type(res)
                 else:
-                    return text_(binary_type(res), encoding=self.percol.encoding, errors='replace')
+                    raise Exception(type(res)) #xxx:
             else:
-                return text_("") #xx:
+                return text_("") #xxx:
 
         return re.sub(self.format_pattern, formatter, s)
