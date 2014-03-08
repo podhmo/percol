@@ -45,6 +45,7 @@ from percol.key     import KeyHandler
 from percol.model   import SelectorModel
 from percol.view    import SelectorView
 from percol.command import SelectorCommand
+from percol.compat import iteritems_
 
 class TerminateLoop(Exception):
     def __init__(self, value):
@@ -243,7 +244,7 @@ class Percol(object):
             self.keymap = {}
         else:
             self.keymap = dict(self.keymap)
-        for key, cmd in keymap.iteritems():
+        for key, cmd in iteritems_(keymap):
             self.keymap[key] = cmd
 
     # default

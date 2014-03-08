@@ -23,6 +23,7 @@ import curses
 import re
 
 from percol import markup, debug
+from percol.compat import iteritems_
 
 FG_COLORS = {
     "black"   : curses.COLOR_BLACK,
@@ -35,7 +36,7 @@ FG_COLORS = {
     "white"   : curses.COLOR_WHITE,
 }
 
-BG_COLORS = dict(("on_" + name, value) for name, value in FG_COLORS.iteritems())
+BG_COLORS = dict(("on_" + name, value) for name, value in iteritems_(FG_COLORS))
 
 ATTRS = {
     "altcharset" : curses.A_ALTCHARSET,
@@ -164,8 +165,8 @@ class Display(object):
     # ============================================================ #
 
     def init_color_pairs(self):
-        for fg_s, fg in FG_COLORS.iteritems():
-            for bg_s, bg in BG_COLORS.iteritems():
+        for fg_s, fg in iteritems_(FG_COLORS):
+            for bg_s, bg in iteritems_(BG_COLORS):
                 if not (fg == bg == 0):
                     curses.init_pair(self.get_pair_number(fg, bg), fg, bg)
 
