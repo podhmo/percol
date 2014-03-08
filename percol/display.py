@@ -18,12 +18,11 @@
 #
 
 import unicodedata
-import types
 import curses
 import re
 
 from percol import markup, debug
-from percol.compat import iteritems_, text_type, xrange_
+from percol.compat import iteritems_, text_type, xrange_, integer_types
 
 FG_COLORS = {
     "black"   : curses.COLOR_BLACK,
@@ -299,7 +298,7 @@ class Display(object):
         return s.encode(self.encoding) if isinstance(s, text_type) else s
 
     def addnstr(self, y, x, s, n, style):
-        if style.__class__ != types.IntType:
+        if not isinstance(style, integer_types):
             style = self.attrs_to_style(style)
 
         # Compute bytes count of the substring that fits in the screen
