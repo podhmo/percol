@@ -70,17 +70,3 @@ class LazyArray(object):
             return True
         except IndexError:
             return False
-
-if __name__ == "__main__":
-    def getnumbers(n):
-        for x in xrange_(1, n):
-            print("yield " + str(x))
-            yield x
-    larray = LazyArray(getnumbers(20))
-    print("larray[7]: %d" % larray[7])
-    for idx, x in enumerate(larray):
-        print("larray[%d]: %d" % (idx, x))
-    print("larray[10]: %d" % larray[10])
-
-    larray2 = LazyArray(getnumbers(20))
-    print("larray2[-1]: %d" % larray2[-1])
